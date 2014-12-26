@@ -62,17 +62,17 @@ def int():
 
 def hex():
     """Return UUID as hexidecimal"""
-    return __builtin__.hex(int())
+    return __builtin__.hex(int())[2:-1]
 
 
 def bin():
     """Return UUID as binary"""
-    return __builtin__.bin(int())
+    return __builtin__.bin(int())[2:]
 
 
 def oct():
     """Return UUID as octodecimal"""
-    return __builtin__.oct(int())
+    return __builtin__.oct(int())[:-1]
 
 
 def main(argv=sys.argv[1:]):
