@@ -24,7 +24,7 @@ pseudo-random generator.
 
 setuptools.setup(
         name='uuid64',
-        version='0.1.1',
+        version='0.2.0',
         description='Generate 64bit UUIDs',
         license='MIT',
         long_description=(__desc__),
