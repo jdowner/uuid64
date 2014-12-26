@@ -6,7 +6,7 @@ NAME
 
 SYNOPSIS
         uuid64 [--help]
-        uuid64 [int|hex|bin|oct]
+        uuid64 [--number <number>] [int|hex|bin|oct]
 
 DESCRIPTION
         This is a simple script that generates a 64bit UUID. The normal type of
@@ -33,6 +33,9 @@ OPTIONS
         -h, --help
             Print out this documentation
 
+        -n, --number
+            The number of UUIDs to generate. The default is 1 value.
+
         int
             This is the default format. The UUID is returned as an integer.
 
@@ -45,6 +48,7 @@ OPTIONS
         hex
             The UUID is returned in an hexidecimal representation.
 
+
 """
 
 import argparse
@@ -53,12 +57,27 @@ import sys
 import uuid64
 
 
+def positive_integer(value):
+    try:
+        assert(int(value) > 0)
+    except Exception:
+        msg = '"{}" is not a positive integer\n'
+        raise argparse.ArgumentTypeError(msg.format(value))
+
+    return int(value)
+
+
 def main(argv=sys.argv[1:]):
-    parser = argparse.ArgumentParser(add_help=False)
+    parser = argparse.ArgumentParser(
+            add_help=False,
+            usage='uuid64 [-n <number>] [int|hex|bin|oct]')
     parser.add_argument('format',
             nargs='?',
             choices=('int', 'hex', 'bin', 'oct'),
             default='int')
+    parser.add_argument('-n', '--number',
+            type=positive_integer,
+            default=1)
     parser.add_argument('-h', '--help',
             action='store_true')
 
@@ -68,7 +87,8 @@ def main(argv=sys.argv[1:]):
         print(__usage__)
         return
 
-    print(getattr(uuid64, args.format)())
+    for _ in range(args.number):
+        print(getattr(uuid64, args.format)())
 
 if __name__ == "__main__":
     main()
