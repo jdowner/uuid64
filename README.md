@@ -1,6 +1,10 @@
 uuid64
 ======
 
+
+Introduction
+------------
+
 This is a simple script that generates a 64bit UUID. The normal type of UUID
 (e.g. those available in the uuid module) are 128bit, which provides
 substantially greater ability to avoid collision between generated values.
@@ -18,3 +22,19 @@ different machines means that this is not a guarantee).
 The second part is a 32bit random number taken from the system that the script
 is running on, e.g. on linux the value is taken from /dev/urandom rather than a
 pseudo-random generator.
+
+
+Install
+-------
+
+To install uuid64 you can use pip,
+
+```
+pip install uuid64
+```
+
+or install from source using,
+
+```
+python setup.py install
+```
