@@ -47,32 +47,10 @@ OPTIONS
 
 """
 
-import __builtin__
 import argparse
-import random
 import sys
-import time
 
-def int():
-    """Return UUID as integer"""
-    base = __builtin__.int(time.time()) << 32
-    rand = random.SystemRandom().getrandbits(32)
-    return base + rand
-
-
-def hex():
-    """Return UUID as hexidecimal"""
-    return __builtin__.hex(int())[2:-1]
-
-
-def bin():
-    """Return UUID as binary"""
-    return __builtin__.bin(int())[2:]
-
-
-def oct():
-    """Return UUID as octodecimal"""
-    return __builtin__.oct(int())[:-1]
+import uuid64
 
 
 def main(argv=sys.argv[1:]):
@@ -90,7 +68,7 @@ def main(argv=sys.argv[1:]):
         print(__usage__)
         return
 
-    print(getattr(sys.modules[__name__], args.format)())
+    print(getattr(uuid64, args.format)())
 
 if __name__ == "__main__":
     main()
